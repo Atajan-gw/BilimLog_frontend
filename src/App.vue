@@ -1,13 +1,7 @@
 <script setup>
-import Navbar from './components/layouts/Navbar.vue';
-import HomePage from './views/HomePage.vue';
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="bg-gray-100 dark:bg-gray-900 min-h-screen">
-      <Navbar />
-      <HomePage />
-  </div>
+  <RouterView />
 </template>
-
-<style scoped></style>
