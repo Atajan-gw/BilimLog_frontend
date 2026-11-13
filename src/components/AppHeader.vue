@@ -1,8 +1,9 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { LogOut } from '@lucide/vue'
+import { LogOut, Moon, Sun } from '@lucide/vue'
 import { auth, logout } from '@/lib/auth'
+import { isDark, toggleDark } from '@/lib/theme'
 
 const router = useRouter()
 const imageFailed = ref(false)
@@ -51,7 +52,7 @@ async function onLogout() {
 </script>
 
 <template>
-  <header class="flex items-center justify-between gap-4 border-b border-sand bg-white/80 px-5 py-4 backdrop-blur sm:px-8">
+  <header class="flex items-center justify-between gap-4 border-b border-sand bg-surface/80 px-5 py-4 backdrop-blur sm:px-8">
     <div class="flex min-w-0 items-center gap-3">
       <img
         v-if="avatarUrl"
@@ -73,6 +74,22 @@ async function onLogout() {
       </div>
     </div>
     <div class="flex items-center gap-3">
+      <button
+        type="button"
+        role="switch"
+        :aria-checked="isDark"
+        :aria-label="isDark ? 'Light mode' : 'Dark mode'"
+        class="relative inline-flex h-9 w-16 shrink-0 items-center rounded-full border border-sand bg-paper"
+        @click="toggleDark"
+      >
+        <span
+          class="absolute top-1 left-1 flex size-7 items-center justify-center rounded-full bg-pine text-white shadow-sm transition-transform dark:bg-white dark:text-ink"
+          :class="isDark ? 'translate-x-7' : 'translate-x-0'"
+        >
+          <Sun v-if="!isDark" class="size-3.5" />
+          <Moon v-else class="size-3.5" />
+        </span>
+      </button>
       <span class="rounded-full bg-pine/10 px-3 py-1 text-sm font-semibold text-pine">{{ roleLabel }}</span>
       <button
         type="button"

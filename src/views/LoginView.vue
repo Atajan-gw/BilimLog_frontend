@@ -78,7 +78,7 @@ async function onSubmit() {
               :type="field.type"
               :autocomplete="field.autocomplete"
               required
-              class="w-full rounded-2xl border border-sand bg-white px-4 py-3 outline-none ring-pine/30 focus:ring-4"
+              class="w-full rounded-2xl border border-sand bg-surface px-4 py-3 outline-none ring-pine/30 focus:ring-4"
             >
             <span v-if="fieldErrors[field.key]" class="mt-1 block text-sm text-red-700">
               {{ fieldErrors[field.key][0] }}
@@ -86,7 +86,7 @@ async function onSubmit() {
           </label>
         </div>
 
-        <p v-if="error" class="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-800">{{ error }}</p>
+        <p v-if="error" class="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-800 dark:bg-red-950/50 dark:text-red-200">{{ error }}</p>
 
         <button
           type="submit"

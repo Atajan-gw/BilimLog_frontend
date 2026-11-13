@@ -88,8 +88,8 @@ onMounted(load)
       <aside>
         <h2 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-ink/50">Toparlarym</h2>
         <p v-if="loading" class="text-sm text-ink/60">Loading...</p>
-        <p v-else-if="error" class="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-800">{{ error }}</p>
-        <p v-else-if="!groups.length" class="rounded-2xl bg-white px-4 py-5 text-sm text-ink/70">
+        <p v-else-if="error" class="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-800 dark:bg-red-950/50 dark:text-red-200">{{ error }}</p>
+        <p v-else-if="!groups.length" class="rounded-2xl bg-surface px-4 py-5 text-sm text-ink/70">
           No groups found.
         </p>
         <div v-else class="space-y-2">
@@ -98,7 +98,7 @@ onMounted(load)
             :key="group.id"
             type="button"
             class="w-full rounded-2xl px-4 py-3 text-left"
-            :class="group.id === selectedId ? 'bg-pine text-white' : 'bg-white hover:bg-sand'"
+            :class="group.id === selectedId ? 'bg-pine text-white' : 'bg-surface hover:bg-sand'"
             @click="selectedId = group.id"
           >
             <p class="font-bold">{{ group.name }}</p>
@@ -108,7 +108,7 @@ onMounted(load)
         </div>
       </aside>
 
-      <section class="rounded-3xl bg-white p-5 shadow-sm sm:p-6">
+      <section class="rounded-3xl bg-surface p-5 shadow-sm sm:p-6">
         <template v-if="selectedGroup">
           <div class="mb-5 flex items-center gap-3">
             <Users class="size-5 text-pine" />
@@ -164,7 +164,7 @@ onMounted(load)
               >
                 <label class="block text-sm">
                   <span class="mb-1 block font-semibold">Course</span>
-                  <select v-model="gradeForm.subject_id" required class="w-full rounded-xl border border-sand bg-white px-3 py-2">
+                  <select v-model="gradeForm.subject_id" required class="w-full rounded-xl border border-sand bg-surface px-3 py-2">
                     <option v-for="subject in subjects" :key="subject.id" :value="String(subject.id)">
                       {{ subject.name }}
                     </option>
@@ -172,14 +172,14 @@ onMounted(load)
                 </label>
                 <label class="block text-sm">
                   <span class="mb-1 block font-semibold">Semester</span>
-                  <input v-model="gradeForm.semester" required maxlength="20" class="w-full rounded-xl border border-sand bg-white px-3 py-2">
+                  <input v-model="gradeForm.semester" required maxlength="20" class="w-full rounded-xl border border-sand bg-surface px-3 py-2">
                 </label>
                 <label class="block text-sm">
                   <span class="mb-1 block font-semibold">Score</span>
-                  <input v-model="gradeForm.score" required type="number" min="0" max="100" step="0.01" class="w-full rounded-xl border border-sand bg-white px-3 py-2">
+                  <input v-model="gradeForm.score" required type="number" min="0" max="100" step="0.01" class="w-full rounded-xl border border-sand bg-surface px-3 py-2">
                 </label>
                 <div class="flex items-end gap-2">
-                  <button type="submit" :disabled="saving" class="rounded-xl bg-ink px-4 py-2 text-sm font-bold text-white disabled:opacity-60">
+                  <button type="submit" :disabled="saving" class="rounded-xl bg-ink px-4 py-2 text-sm font-bold text-paper disabled:opacity-60">
                     {{ saving ? '...' : 'Save' }}
                   </button>
                   <button type="button" class="rounded-xl px-3 py-2 text-sm" @click="gradingStudent = null">Cancel</button>

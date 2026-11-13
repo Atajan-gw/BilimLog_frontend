@@ -7,7 +7,7 @@ import { auth } from '@/lib/auth'
   <div class="min-h-screen">
     <AppHeader />
     <main class="mx-auto max-w-xl px-5 py-10">
-      <section class="rounded-3xl bg-white p-6 shadow-sm">
+      <section class="rounded-3xl bg-surface p-6 shadow-sm">
         <h2 class="text-2xl font-extrabold">{{ auth.user?.name }} {{ auth.user?.surname }}</h2>
         <dl class="mt-5 space-y-3 text-sm">
           <div class="flex justify-between gap-4 border-b border-sand pb-3">

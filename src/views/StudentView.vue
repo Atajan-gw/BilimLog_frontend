@@ -22,9 +22,9 @@ const average = computed(() => {
 
 function scoreTone(score) {
   const value = Number(score)
-  if (value >= 90) return 'bg-emerald-100 text-emerald-800'
-  if (value >= 70) return 'bg-amber-100 text-amber-800'
-  return 'bg-rose-100 text-rose-800'
+  if (value >= 90) return 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-200'
+  if (value >= 70) return 'bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-200'
+  return 'bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-200'
 }
 
 onMounted(async () => {
@@ -44,16 +44,16 @@ onMounted(async () => {
     <AppHeader />
     <main class="mx-auto max-w-5xl px-5 py-8 sm:px-8">
       <p v-if="loading" class="text-ink/60">Loading data...</p>
-      <p v-else-if="error" class="rounded-2xl bg-red-50 px-4 py-3 text-red-800">{{ error }}</p>
+      <p v-else-if="error" class="rounded-2xl bg-red-50 px-4 py-3 text-red-800 dark:bg-red-950/50 dark:text-red-200">{{ error }}</p>
 
       <template v-else-if="profile">
         <section class="grid gap-4 sm:grid-cols-3">
-          <article class="rounded-3xl bg-white p-5 shadow-sm">
+          <article class="rounded-3xl bg-surface p-5 shadow-sm">
             <School class="size-5 text-pine" />
             <p class="mt-3 text-sm text-ink/60">Faculty</p>
             <p class="text-lg font-bold">{{ profile.faculty?.name || '—' }}</p>
           </article>
-          <article class="rounded-3xl bg-white p-5 shadow-sm">
+          <article class="rounded-3xl bg-surface p-5 shadow-sm">
             <IdCard class="size-5 text-pine" />
             <p class="mt-3 text-sm text-ink/60">Group</p>
             <p class="text-lg font-bold">{{ profile.group?.name || '—' }}</p>
@@ -67,7 +67,7 @@ onMounted(async () => {
           </article>
         </section>
 
-        <section class="mt-6 rounded-3xl bg-white p-5 shadow-sm sm:p-6">
+        <section class="mt-6 rounded-3xl bg-surface p-5 shadow-sm sm:p-6">
           <div class="mb-4 flex items-end justify-between gap-3">
             <div>
               <h2 class="text-xl font-extrabold">Grades by Courses</h2>

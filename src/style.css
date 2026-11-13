@@ -9,6 +9,17 @@
   --color-pine: #0f6b4c;
   --color-pine-dark: #0b533b;
   --color-sand: #e7dfd0;
+  --color-surface: #ffffff;
+}
+
+html.dark {
+  --color-ink: #f3efe6;
+  --color-paper: #101614;
+  --color-pine: #3dba8a;
+  --color-pine-dark: #2f9d70;
+  --color-sand: #2c3832;
+  --color-surface: #1b2621;
+  color-scheme: dark;
 }
 
 html,
