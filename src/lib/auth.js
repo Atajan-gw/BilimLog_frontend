@@ -43,6 +43,11 @@ export async function logout() {
   persist()
 }
 
+export function setUser(user) {
+  auth.user = user
+  persist()
+}
+
 export async function refreshMe() {
   if (!auth.token) {
     auth.ready = true
