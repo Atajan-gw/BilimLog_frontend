@@ -32,7 +32,7 @@ onMounted(async () => {
     const data = await api('/student/profile', { token: auth.token })
     profile.value = data.data
   } catch (err) {
-    error.value = err.message || 'Profil açylmady.'
+    error.value = err.message || 'Profile not found.'
   } finally {
     loading.value = false
   }
@@ -43,25 +43,25 @@ onMounted(async () => {
   <div class="min-h-screen">
     <AppHeader />
     <main class="mx-auto max-w-5xl px-5 py-8 sm:px-8">
-      <p v-if="loading" class="text-ink/60">Maglumatlar ýüklenýär...</p>
+      <p v-if="loading" class="text-ink/60">Loading data...</p>
       <p v-else-if="error" class="rounded-2xl bg-red-50 px-4 py-3 text-red-800">{{ error }}</p>
 
       <template v-else-if="profile">
         <section class="grid gap-4 sm:grid-cols-3">
           <article class="rounded-3xl bg-white p-5 shadow-sm">
             <School class="size-5 text-pine" />
-            <p class="mt-3 text-sm text-ink/60">Fakultet</p>
+            <p class="mt-3 text-sm text-ink/60">Faculty</p>
             <p class="text-lg font-bold">{{ profile.faculty?.name || '—' }}</p>
           </article>
           <article class="rounded-3xl bg-white p-5 shadow-sm">
             <IdCard class="size-5 text-pine" />
-            <p class="mt-3 text-sm text-ink/60">Topar we hünär</p>
+            <p class="mt-3 text-sm text-ink/60">Group</p>
             <p class="text-lg font-bold">{{ profile.group?.name || '—' }}</p>
-            <p class="text-sm text-ink/70">{{ profile.specialty }} · {{ profile.course_year }}-nji kurs</p>
+            <p class="text-sm text-ink/70">{{ profile.specialty }} · {{ profile.course_year }}-th course</p>
           </article>
           <article class="rounded-3xl bg-pine p-5 text-white shadow-sm">
             <BookOpen class="size-5" />
-            <p class="mt-3 text-sm text-white/70">Orta baha</p>
+            <p class="mt-3 text-sm text-white/70">Average Score</p>
             <p class="text-3xl font-extrabold">{{ average ?? '—' }}</p>
             <p class="text-sm text-white/70">{{ grades.length }} baha · {{ profile.student_id_card_number }}</p>
           </article>
@@ -70,29 +70,29 @@ onMounted(async () => {
         <section class="mt-6 rounded-3xl bg-white p-5 shadow-sm sm:p-6">
           <div class="mb-4 flex items-end justify-between gap-3">
             <div>
-              <h2 class="text-xl font-extrabold">Sapaklar boýunça bahalar</h2>
+              <h2 class="text-xl font-extrabold">Grades by Courses</h2>
               <p class="text-sm text-ink/60">{{ auth.user?.phone_number }} · {{ auth.user?.username }}</p>
             </div>
           </div>
 
           <p v-if="!grades.length" class="rounded-2xl bg-paper px-4 py-6 text-center text-ink/70">
-            Entek baha goýulmadyk.
+            No grades found.
           </p>
 
           <div v-else class="overflow-x-auto">
             <table class="w-full min-w-[640px] text-left text-sm">
               <thead class="text-ink/50">
                 <tr>
-                  <th class="pb-3 font-semibold">Sapak</th>
-                  <th class="pb-3 font-semibold">Kredit</th>
-                  <th class="pb-3 font-semibold">Semestr</th>
-                  <th class="pb-3 font-semibold">Baha</th>
+                  <th class="pb-3 font-semibold">Course</th>
+                  <th class="pb-3 font-semibold">Credit</th>
+                  <th class="pb-3 font-semibold">Semester</th>
+                  <th class="pb-3 font-semibold">Score</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="grade in grades" :key="grade.id" class="border-t border-sand">
                   <td class="py-3 pr-4">
-                    <p class="font-semibold">{{ grade.subject?.name || 'Sapak' }}</p>
+                    <p class="font-semibold">{{ grade.subject?.name || 'Lesson' }}</p>
                     <p class="text-ink/60">{{ grade.subject?.description }}</p>
                   </td>
                   <td class="py-3 pr-4">{{ grade.subject?.credits ?? '—' }}</td>

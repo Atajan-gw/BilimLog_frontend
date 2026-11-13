@@ -39,7 +39,7 @@ async function load() {
     if (!selectedId.value && groups.value.length) selectedId.value = groups.value[0].id
     if (!gradeForm.subject_id && subjects.value.length) gradeForm.subject_id = String(subjects.value[0].id)
   } catch (err) {
-    error.value = err.message || 'Toparlar açylmady.'
+    error.value = err.message || 'Groups not found.'
   } finally {
     loading.value = false
   }
@@ -67,12 +67,12 @@ async function saveGrade() {
         score: Number(gradeForm.score),
       },
     })
-    notice.value = 'Baha ýazylady.'
+    notice.value = 'Grade saved.'
     gradingStudent.value = null
     await load()
   } catch (err) {
     const first = err.errors ? Object.values(err.errors)[0]?.[0] : null
-    notice.value = first || err.message || 'Baha ýazylmady.'
+    notice.value = first || err.message || 'Grade not saved.'
   } finally {
     saving.value = false
   }
@@ -87,10 +87,10 @@ onMounted(load)
     <main class="mx-auto grid max-w-6xl gap-6 px-5 py-8 lg:grid-cols-[280px_1fr] sm:px-8">
       <aside>
         <h2 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-ink/50">Toparlarym</h2>
-        <p v-if="loading" class="text-sm text-ink/60">Ýüklenýär...</p>
+        <p v-if="loading" class="text-sm text-ink/60">Loading...</p>
         <p v-else-if="error" class="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-800">{{ error }}</p>
         <p v-else-if="!groups.length" class="rounded-2xl bg-white px-4 py-5 text-sm text-ink/70">
-          Size entek topar berilmedik.
+          No groups found.
         </p>
         <div v-else class="space-y-2">
           <button
@@ -102,8 +102,8 @@ onMounted(load)
             @click="selectedId = group.id"
           >
             <p class="font-bold">{{ group.name }}</p>
-            <p class="text-sm opacity-80">{{ group.faculty?.name || 'Fakultet ýok' }} · {{ group.course_number }}-nji kurs</p>
-            <p class="mt-1 text-xs opacity-70">{{ group.students?.length || 0 }} talyp</p>
+            <p class="text-sm opacity-80">{{ group.faculty?.name || 'Faculty not found' }} · {{ group.course_number }}-th course</p>
+            <p class="mt-1 text-xs opacity-70">{{ group.students?.length || 0 }} student</p>
           </button>
         </div>
       </aside>
@@ -114,14 +114,14 @@ onMounted(load)
             <Users class="size-5 text-pine" />
             <div>
               <h2 class="text-xl font-extrabold">{{ selectedGroup.name }}</h2>
-              <p class="text-sm text-ink/60">Talypylar we olaryň bahalary</p>
+              <p class="text-sm text-ink/60">Students and their grades</p>
             </div>
           </div>
 
           <p v-if="notice" class="mb-4 rounded-2xl bg-paper px-4 py-3 text-sm">{{ notice }}</p>
 
           <p v-if="!selectedGroup.students?.length" class="rounded-2xl bg-paper px-4 py-8 text-center text-ink/70">
-            Bu toparda entek talyp ýok.
+            No students found.
           </p>
 
           <div v-else class="space-y-4">
@@ -142,7 +142,7 @@ onMounted(load)
                   class="rounded-full bg-pine px-4 py-2 text-sm font-bold text-white hover:bg-pine-dark"
                   @click="openGrade(student)"
                 >
-                  Baha goý
+                  Add Grade
                 </button>
               </div>
 
@@ -155,7 +155,7 @@ onMounted(load)
                   {{ grade.subject?.name }} · {{ grade.semester }} · {{ Number(grade.score).toFixed(2) }}
                 </span>
               </div>
-              <p v-else class="mt-3 text-sm text-ink/50">Baha ýok.</p>
+              <p v-else class="mt-3 text-sm text-ink/50">No grades found.</p>
 
               <form
                 v-if="gradingStudent?.id === student.id"
@@ -163,7 +163,7 @@ onMounted(load)
                 @submit.prevent="saveGrade"
               >
                 <label class="block text-sm">
-                  <span class="mb-1 block font-semibold">Sapak</span>
+                  <span class="mb-1 block font-semibold">Course</span>
                   <select v-model="gradeForm.subject_id" required class="w-full rounded-xl border border-sand bg-white px-3 py-2">
                     <option v-for="subject in subjects" :key="subject.id" :value="String(subject.id)">
                       {{ subject.name }}
@@ -171,24 +171,24 @@ onMounted(load)
                   </select>
                 </label>
                 <label class="block text-sm">
-                  <span class="mb-1 block font-semibold">Semestr</span>
+                  <span class="mb-1 block font-semibold">Semester</span>
                   <input v-model="gradeForm.semester" required maxlength="20" class="w-full rounded-xl border border-sand bg-white px-3 py-2">
                 </label>
                 <label class="block text-sm">
-                  <span class="mb-1 block font-semibold">Baha</span>
+                  <span class="mb-1 block font-semibold">Score</span>
                   <input v-model="gradeForm.score" required type="number" min="0" max="100" step="0.01" class="w-full rounded-xl border border-sand bg-white px-3 py-2">
                 </label>
                 <div class="flex items-end gap-2">
                   <button type="submit" :disabled="saving" class="rounded-xl bg-ink px-4 py-2 text-sm font-bold text-white disabled:opacity-60">
-                    {{ saving ? '...' : 'Ýaz' }}
+                    {{ saving ? '...' : 'Save' }}
                   </button>
-                  <button type="button" class="rounded-xl px-3 py-2 text-sm" @click="gradingStudent = null">Ýatyr</button>
+                  <button type="button" class="rounded-xl px-3 py-2 text-sm" @click="gradingStudent = null">Cancel</button>
                 </div>
               </form>
             </article>
           </div>
         </template>
-        <p v-else class="text-ink/60">Topar saýlaň.</p>
+        <p v-else class="text-ink/60">Select a group.</p>
       </section>
     </main>
   </div>

@@ -11,9 +11,9 @@ export const auth = reactive({
 })
 
 export function homeFor(user) {
-  if (user?.role === 'teacher') return '/mugallym'
-  if (user?.role === 'student') return '/talyp'
-  return '/profil'
+  if (user?.role === 'teacher') return '/teacher'
+  if (user?.role === 'student') return '/student'
+  return '/profile'
 }
 
 function persist() {

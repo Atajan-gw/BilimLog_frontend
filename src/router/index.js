@@ -9,9 +9,9 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'login', component: LoginView, meta: { guest: true } },
-    { path: '/talyp', name: 'student', component: StudentView, meta: { role: 'student' } },
-    { path: '/mugallym', name: 'teacher', component: TeacherView, meta: { role: 'teacher' } },
-    { path: '/profil', name: 'profile', component: ProfileView, meta: { auth: true } },
+    { path: '/student', name: 'student', component: StudentView, meta: { role: 'student' } },
+    { path: '/teacher', name: 'teacher', component: TeacherView, meta: { role: 'teacher' } },
+    { path: '/profile', name: 'profile', component: ProfileView, meta: { auth: true } },
   ],
 })
 

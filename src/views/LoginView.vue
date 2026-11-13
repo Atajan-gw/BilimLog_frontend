@@ -18,11 +18,11 @@ const form = reactive({
 })
 
 const fields = [
-  { key: 'name', label: 'Ady', type: 'text', autocomplete: 'given-name' },
-  { key: 'surname', label: 'Familiýa', type: 'text', autocomplete: 'family-name' },
-  { key: 'username', label: 'Ulanyjy ady', type: 'text', autocomplete: 'username' },
-  { key: 'phone_number', label: 'Telefon belgisi', type: 'tel', autocomplete: 'tel' },
-  { key: 'password', label: 'Parol', type: 'password', autocomplete: 'current-password' },
+  { key: 'name', label: 'Name', type: 'text', autocomplete: 'given-name' },
+  { key: 'surname', label: 'Surname', type: 'text', autocomplete: 'family-name' },
+  { key: 'username', label: 'Username', type: 'text', autocomplete: 'username' },
+  { key: 'phone_number', label: 'Phone Number', type: 'tel', autocomplete: 'tel' },
+  { key: 'password', label: 'Password', type: 'password', autocomplete: 'current-password' },
 ]
 
 async function onSubmit() {
@@ -35,8 +35,8 @@ async function onSubmit() {
   } catch (err) {
     fieldErrors.value = err.errors || {}
     error.value = err.errors
-      ? 'Ähli meýdanlary dogry dolduryň.'
-      : 'Giriş şowsuz. Maglumatlary barlaň.'
+      ? 'All fields are required.'
+      : 'Login failed. Please check your data.'
   } finally {
     loading.value = false
   }
@@ -50,13 +50,13 @@ async function onSubmit() {
       <div class="absolute -bottom-28 -left-16 size-96 rounded-full bg-black/10"></div>
       <div class="relative flex items-center gap-3 text-lg font-extrabold">
         <GraduationCap class="size-8" />
-        Bilimlog
+        BilimLog
       </div>
       <div class="relative max-w-md">
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">Okuw žurnaly</p>
-        <h2 class="mt-3 text-5xl font-extrabold leading-tight">Mugallym we talyp bir ýerde.</h2>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-white/70">Learning Journal</p>
+        <h2 class="mt-3 text-5xl font-extrabold leading-tight">Teacher and Student in one place.</h2>
         <p class="mt-4 text-lg text-white/80">
-          Girişden soň ulgam rolyňyzy kesgitleýär: mugallym toparlaryny we bahalary görýär, talyp bolsa sapak bahalaryny görýär.
+          After login, you can access your dashboard: teachers can view their courses and grades, students can view their course grades.
         </p>
       </div>
     </section>
@@ -65,10 +65,10 @@ async function onSubmit() {
       <form class="w-full max-w-md" @submit.prevent="onSubmit">
         <div class="mb-8 flex items-center gap-3 lg:hidden">
           <GraduationCap class="size-8 text-pine" />
-          <span class="text-xl font-extrabold">Bilimlog</span>
+          <span class="text-xl font-extrabold">BilimLog</span>
         </div>
-        <h1 class="text-3xl font-extrabold">Hasaba girmek</h1>
-        <p class="mt-2 text-sm text-ink/70">Adyňyz, familiýaňyz, ulanyjy adyňyz, telefon belgiňiz we parolyňyz gerek.</p>
+        <h1 class="text-3xl font-extrabold">Login</h1>
+        <p class="mt-2 text-sm text-ink/70">Your name, surname, username, phone number and password are required.</p>
 
         <div class="mt-8 space-y-4">
           <label v-for="field in fields" :key="field.key" class="block">
@@ -93,7 +93,7 @@ async function onSubmit() {
           :disabled="loading"
           class="mt-6 w-full rounded-2xl bg-pine px-4 py-3 font-bold text-white hover:bg-pine-dark disabled:opacity-60"
         >
-          {{ loading ? 'Barlanýar...' : 'Girmek' }}
+          {{ loading ? 'Loading...' : 'Login' }}
         </button>
       </form>
     </section>
