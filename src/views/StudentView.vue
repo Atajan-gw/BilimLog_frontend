@@ -63,7 +63,7 @@ onMounted(async () => {
             <BookOpen class="size-5" />
             <p class="mt-3 text-sm text-white/70">Average Score</p>
             <p class="text-3xl font-extrabold">{{ average ?? '—' }}</p>
-            <p class="text-sm text-white/70">{{ grades.length }} baha · {{ profile.student_id_card_number }}</p>
+            <p class="text-sm text-white/70">{{ grades.length }} score · {{ profile.student_id_card_number }}</p>
           </article>
         </section>
 

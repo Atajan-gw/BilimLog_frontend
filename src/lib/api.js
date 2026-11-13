@@ -20,7 +20,7 @@ export async function api(path, { method = 'GET', body, token } = {}) {
 
   const data = await response.json().catch(() => ({}))
   if (!response.ok) {
-    const error = new Error(data.message || 'Serwer jogap bermedi.')
+    const error = new Error(data.message || "Server don't resport")
     error.status = response.status
     error.errors = data.errors || null
     throw error

@@ -86,7 +86,7 @@ onMounted(load)
     <AppHeader />
     <main class="mx-auto grid max-w-6xl gap-6 px-5 py-8 lg:grid-cols-[280px_1fr] sm:px-8">
       <aside>
-        <h2 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-ink/50">Toparlarym</h2>
+        <h2 class="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-ink/50">Groups</h2>
         <p v-if="loading" class="text-sm text-ink/60">Loading...</p>
         <p v-else-if="error" class="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-800 dark:bg-red-950/50 dark:text-red-200">{{ error }}</p>
         <p v-else-if="!groups.length" class="rounded-2xl bg-surface px-4 py-5 text-sm text-ink/70">
